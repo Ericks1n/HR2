@@ -262,10 +262,11 @@ if (mediaQuery.matches) {
 	const elementInView = (el, dividend = 1) => {
 		const elementTop = el.getBoundingClientRect().top;
 
-		return (
-			elementTop <=
-			(window.innerHeight || document.documentElement.clientHeight) / dividend
-		);
+	// Even lower dividend for instant appearance (was 1.05)
+	return (
+		elementTop <=
+		(window.innerHeight || document.documentElement.clientHeight) / 1.01
+	);
 	};
 
 	const elementOutofView = (el) => {
@@ -286,7 +287,7 @@ if (mediaQuery.matches) {
 
 	const handleScrollAnimation = () => {
 		scrollElements.forEach((el) => {
-			if (elementInView(el, 1.25)) {
+			if (elementInView(el, 1.01)) {
 				displayScrollElement(el);
 			} else if (elementOutofView(el)) {
 				hideScrollElement(el)
